@@ -25,7 +25,7 @@ pub use player::Player;
 
 use std::sync::LazyLock;
 
-static INSTRUMENTS: LazyLock<Vec<Spec>> = LazyLock::new(|| vec![aerophones::bugle::spec(), aerophones::air_horn::spec(), aerophones::steam_whistle::spec()]);
+static INSTRUMENTS: LazyLock<Vec<Spec>> = LazyLock::new(|| vec![aerophones::voice::spec(), aerophones::bugle::spec(), aerophones::air_horn::spec(), aerophones::steam_whistle::spec()]);
 
 /// Every instrument.
 pub fn instruments() -> &'static [Spec] {

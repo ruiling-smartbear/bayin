@@ -94,3 +94,34 @@ fn the_air_horns_chimes_are_on_their_notes() {
     let f = pitch(&x[48000..56192], 200.0, 500.0);
     assert!(cents(f, 311.13).abs() < 15.0, "lowest chime at {f:.1} Hz");
 }
+
+/// How strong the sound is at one frequency (a single bin of a Fourier transform).
+fn level_at(x: &[f32], hz: f64) -> f64 {
+    let w = 2.0 * std::f64::consts::PI * hz / FS;
+    let (re, im) = x.iter().enumerate().fold((0.0, 0.0), |(re, im), (n, v)| (re + *v as f64 * (w * n as f64).cos(), im + *v as f64 * (w * n as f64).sin()));
+    (re * re + im * im).sqrt() / x.len() as f64
+}
+
+#[test]
+fn the_voices_vowels_are_the_vowels_asked_for() {
+    let voice = instrument("voice").unwrap();
+    let mut player = Player::new(voice, FS, &[]);
+    player.play(voice.phrase("vowels").unwrap());
+    let mut x = vec![0f32; (3.5 * FS) as usize];
+    player.render(&mut x);
+    // [a] has its second resonance near 1450 Hz and little at 2200; [i] is the other way round.
+    // The pitch is 110 Hz, so measure at its 13th and 20th harmonics.
+    let window = |t: f64| &x[(t * FS) as usize..(t * FS) as usize + 8800];
+    let (a, i) = (window(0.3), window(1.7));
+    let lean = |v: &[f32]| level_at(v, 1430.0) / level_at(v, 2200.0);
+    assert!(lean(a) > 10.0 * lean(i), "[a] {:.2}, [i] {:.2}", lean(a), lean(i));
+}
+
+#[test]
+fn another_body_is_another_voice() {
+    let voice = instrument("voice").unwrap();
+    let man = hold(voice, 0.6, &[]);
+    let child = hold(voice, 0.6, &[("child", 1.0)]);
+    assert!(man != child);
+    assert!(rms(&child[14400..]) > 0.02, "the child's voice is silent");
+}

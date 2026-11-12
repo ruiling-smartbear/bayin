@@ -28,6 +28,7 @@ itself a set of numbers you can change.
 
 | | How it makes sound | Measured against | Fit |
 |---|---|---|---|
+| `voice` | vocal folds under a throat, mouth and nose shaped by tongue, jaw, lips and soft palate | CHIMERA's own vowel table | five vowels within 2% of its formants |
 | `bugle` | lips buzzing into a mouthpiece, a brass bore and a bell | a real G bugle | three main notes within 31 cents, clean; harmonics within about 5 dB |
 | `airhorn` | five diaphragms, each into its own flaring horn | nothing yet | each chime within 5 cents of its note |
 | `steamwhistle` | steam blown across the mouths of three stopped bells | nothing yet | |
@@ -41,6 +42,7 @@ measured against and how close it is.
 cargo build --release
 
 target/release/bayin list bugle
+target/release/bayin play voice vowels.wav --phrase vowels
 target/release/bayin play bugle fanfare.wav --phrase fanfare
 target/release/bayin play bugle note.wav --seconds 2 pitch=494 pressure=55 room=0
 ```
@@ -80,7 +82,9 @@ bowed they are far apart, and that gap is what a model of the instrument has to 
   it is heard in. A **player** plays one.
 - The air inside the wind instruments (tubes, openings, lip valves, jets) is simulated by
   [CHIMERA](https://github.com/jamesondh/chimera-vocal-synth)'s airway engine, used unchanged
-  and pinned to one commit. A single file, `air.rs`, is all that knows it.
+  and pinned to one commit. The `voice` is CHIMERA's whole voice model; Bayin gives it the same
+  sheet as the others: 17 articulators, pitch and breath as actions, the body as its design. A
+  single file, `air.rs`, is all that knows that crate.
 - Instruments are grouped by how they make sound. Only `aerophones` (a column of air) has
   anything in it yet. Strings, skins and bars need their own physics.
 - A design is not guessed. `tools/calibrate_bugle.py` searches for the one whose notes match a
@@ -93,6 +97,9 @@ To add an instrument: [docs/ADDING.md](docs/ADDING.md).
 - **Bugle.** Its lowest note (297 Hz) does not sound. Asked for a pitch between two notes, it
   gives a rough tone in between; a real bugle snaps to the nearer note. Its lowest main note is
   31 cents flat.
+- **Voice.** A dataset of random articulator positions is babble, mostly not speech. Sung or
+  spoken words (CHIMERA can plan them) are not connected yet. The vowel phrases use a man's
+  vowel postures whatever the body.
 - **Air horn and steam whistle** are not fitted to recordings. A real K5LA horn is much brighter
   between 700 and 3000 Hz.
 - **The space and the wave steepening** are simple stages after the instrument's opening. They

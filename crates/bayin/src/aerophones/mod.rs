@@ -2,3 +2,4 @@
 pub mod air_horn;
 pub mod bugle;
 pub mod steam_whistle;
+pub mod voice;

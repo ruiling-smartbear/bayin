@@ -1,5 +1,6 @@
 Bayin builds on CHIMERA, a physical-modelling voice synthesizer by Jameson Hodge
 (https://github.com/jamesondh/chimera-vocal-synth, MIT License). Its airway simulation (tubes,
-ports, radiation, the lip valve and whistle sources, and its deterministic math) is used as a
-dependency, unchanged, pinned in Cargo.toml. Bayin's instruments, player, space and steepening
+ports, radiation, the lip valve and whistle sources, and its deterministic math) and its human
+voice model (anatomy, articulators, vocal folds, calibrated vowels) are used as a dependency,
+unchanged, pinned in Cargo.toml. Bayin's instruments, player, space and steepening
 stages, tools and data format are its own.
