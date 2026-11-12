@@ -207,6 +207,7 @@ pub fn spec() -> Spec {
             license: "Public domain",
             fit: "Notes at 394, 493 and 594 Hz: within 31 cents, clean, speaking within 0.1 s. Harmonics 1–10 within about 5 dB on average. Not right yet: the 297 Hz note does not sound, and a pitch asked for between two notes gives a rough tone in between instead of snapping to the nearer note.",
         }),
+        credit: "Assembled in Bayin from CHIMERA's tubes and lip valve.",
         build,
     }
 }

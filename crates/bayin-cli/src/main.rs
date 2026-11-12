@@ -48,7 +48,7 @@ fn list(id: Option<&String>) -> Result<(), String> {
         return Ok(());
     };
     let s = spec(id)?;
-    println!("{} ({})\n{}\n", s.name, s.id, s.blurb);
+    println!("{} ({})\n{}\nModel: {}\n", s.name, s.id, s.blurb, s.credit);
     for (kind, title) in [(Kind::Action, "Actions"), (Kind::Design, "Design"), (Kind::Space, "Space")] {
         let ps: Vec<_> = s.params.iter().filter(|p| p.kind == kind).collect();
         if ps.is_empty() {

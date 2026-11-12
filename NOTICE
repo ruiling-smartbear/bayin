@@ -1,6 +1,28 @@
-Bayin builds on CHIMERA, a physical-modelling voice synthesizer by Jameson Hodge
-(https://github.com/jamesondh/chimera-vocal-synth, MIT License). Its airway simulation (tubes,
-ports, radiation, the lip valve and whistle sources, and its deterministic math) and its human
-voice model (anatomy, articulators, vocal folds, calibrated vowels) are used as a dependency,
-unchanged, pinned in Cargo.toml. Bayin's instruments, player, space and steepening
-stages, tools and data format are its own.
+Bayin stands on other people's work. This file says whose.
+
+CHIMERA
+  A physical-modelling voice synthesizer by Jameson Hodge.
+  https://github.com/jamesondh/chimera-vocal-synth, MIT License (LICENSES/CHIMERA-MIT.txt).
+  Used unchanged, as a dependency pinned in Cargo.toml. From it come:
+    - the simulation of air in tubes: sections, openings, walls, radiation, turbulence noise
+    - the sound sources: the vocal fold model, the lip valve, the whistle
+    - the whole human voice: anatomy, articulators and their limits, calibrated vowels
+    - the creatures: songbird, seal, alligator, elephant, with their parameters and calls
+    - the mammal airway the dog is built on
+    - deterministic math and the decimation filter
+  Without CHIMERA there would be no sound in Bayin.
+
+What is Bayin's own
+  The Instrument, Spec and Player layer; the bugle, air horn, steam whistle and dog, each
+  assembled from CHIMERA's parts; the space and wave-steepening stages; the measuring and
+  calibration tools; the dataset format and tool.
+
+Reference recordings
+  The recordings Bayin's instruments are measured against are other people's, on Wikimedia
+  Commons. They are not in this repository. Each one, with its author and license, is listed in
+  references/SOURCES.md.
+
+Ideas
+  Treating an instrument as actions that become sound, to be learned by a world model, follows
+  Music-JEPA: Z. Wang, K. Fang and Y. LeCun, "Music-JEPA: Learning a World Model of Sound from
+  Action", arXiv:2607.22000, 2026.

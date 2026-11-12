@@ -136,6 +136,8 @@ pub struct Spec {
     /// scales the model's units to a full scale of ±1
     pub gain: f64,
     pub reference: Option<Reference>,
+    /// whose model this is
+    pub credit: &'static str,
     /// a new instrument at this sample rate
     pub build: fn(f64) -> Box<dyn Instrument>,
 }

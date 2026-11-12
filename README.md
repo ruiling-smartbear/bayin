@@ -4,6 +4,8 @@
 
 <p align="center"><b>Instruments as physical models: actions in, sound out.</b></p>
 
+<p align="center">Built on <a href="https://github.com/jamesondh/chimera-vocal-synth">CHIMERA</a> by Jameson Hodge, which simulates the air. See <a href="#credits">Credits</a>.</p>
+
 Bayin simulates how an instrument makes sound. You give it what a player does (the pitch the
 lips are set for, the breath, the tongue) and it computes the air moving through the
 instrument, sample by sample. There are no recordings inside and no neural audio.
@@ -26,15 +28,17 @@ itself a set of numbers you can change.
 
 ## Instruments
 
-| | How it makes sound | Measured against | Fit |
-|---|---|---|---|
-| `voice` | vocal folds under a throat, mouth and nose shaped by tongue, jaw, lips and soft palate | CHIMERA's own vowel table | five vowels within 2% of its formants |
-| `bugle` | lips buzzing into a mouthpiece, a brass bore and a bell | a real G bugle | three main notes within 31 cents, clean; harmonics within about 5 dB |
-| `airhorn` | five diaphragms, each into its own flaring horn | nothing yet | each chime within 5 cents of its note |
-| `steamwhistle` | steam blown across the mouths of three stopped bells | nothing yet | |
+| | How it makes sound | Model | Measured against | Fit |
+|---|---|---|---|---|
+| `voice` | vocal folds under a throat, mouth and nose shaped by tongue, jaw, lips and soft palate | CHIMERA's, unchanged | CHIMERA's own vowel table | five vowels within 2% of its formants |
+| `songbird` `seal` `alligator` `elephant` | a syrinx, a seal's larynx, an alligator's roar, an elephant's rumble and trumpet | CHIMERA's, unchanged | | sample for sample the same as in CHIMERA |
+| `bugle` | lips buzzing into a mouthpiece, a brass bore and a bell | assembled here from CHIMERA's parts | a real G bugle | three main notes within 31 cents, clean; harmonics within about 5 dB |
+| `dog` | a larynx under a throat, a long mouth and a nose: bark, growl, howl, whine | assembled here from CHIMERA's parts | real barks, growls and a howl | lengths and pitches in the measured ranges; the bark is too bright |
+| `airhorn` | five diaphragms, each into its own flaring horn | assembled here from CHIMERA's parts | nothing yet | each chime within 5 cents of its note |
+| `steamwhistle` | steam blown across the mouths of three stopped bells | assembled here from CHIMERA's parts | nothing yet | |
 
-`bayin list <id>` prints an instrument's actions, its design, its phrases, the recording it was
-measured against and how close it is.
+`bayin list <id>` prints whose model an instrument is, its actions, its design, its phrases, the
+recording it was measured against and how close it is.
 
 ## Quick start
 
@@ -82,8 +86,8 @@ bowed they are far apart, and that gap is what a model of the instrument has to 
   it is heard in. A **player** plays one.
 - The air inside the wind instruments (tubes, openings, lip valves, jets) is simulated by
   [CHIMERA](https://github.com/jamesondh/chimera-vocal-synth)'s airway engine, used unchanged
-  and pinned to one commit. The `voice` is CHIMERA's whole voice model; Bayin gives it the same
-  sheet as the others: 17 articulators, pitch and breath as actions, the body as its design. A
+  and pinned to one commit. The `voice` and the four creatures are CHIMERA's own models; Bayin gives them the same
+  sheet as the others. For the voice: 17 articulators, pitch and breath as actions, the body as its design. A
   single file, `air.rs`, is all that knows that crate.
 - Instruments are grouped by how they make sound. Only `aerophones` (a column of air) has
   anything in it yet. Strings, skins and bars need their own physics.
@@ -100,6 +104,8 @@ To add an instrument: [docs/ADDING.md](docs/ADDING.md).
 - **Voice.** A dataset of random articulator positions is babble, mostly not speech. Sung or
   spoken words (CHIMERA can plan them) are not connected yet. The vowel phrases use a man's
   vowel postures whatever the body.
+- **Dog.** Its bark has about 10 dB too much energy between 1.5 and 3 kHz. Its airway is a
+  guess at a medium dog. Its whine was not measured against anything.
 - **Air horn and steam whistle** are not fitted to recordings. A real K5LA horn is much brighter
   between 700 and 3000 Hz.
 - **The space and the wave steepening** are simple stages after the instrument's opening. They
@@ -114,6 +120,26 @@ physical models of many more instruments. Bayin differs in two ways: each design
 real recording and says how close it got, and everything is arranged around writing down the
 actions next to the sound.
 
+## Credits
+
+Bayin is a layer on other people's work.
+
+- **[CHIMERA](https://github.com/jamesondh/chimera-vocal-synth)**, by Jameson Hodge (MIT). Every
+  sound here comes out of CHIMERA's simulation of air in tubes. The human voice, the songbird,
+  the seal, the alligator and the elephant are CHIMERA's models outright, with their parameters
+  and calls, used unchanged. The bugle, the air horn, the steam whistle and the dog are assembled
+  here from CHIMERA's tubes, valves, fold model and mammal airway.
+- **The recordings** each instrument is measured against belong to the people who made them and
+  shared them on Wikimedia Commons: [references/SOURCES.md](references/SOURCES.md) lists every
+  one with its author and license. None of the audio is in this repository.
+- **The idea** of an instrument as actions that become sound, to be learned by a world model, is
+  from [Music-JEPA](https://arxiv.org/abs/2607.22000) (Wang, Fang and LeCun, 2026).
+
+What Bayin adds: one sheet for every instrument (actions, design, space), a player, the
+instruments it assembles, fitting designs to recordings and saying how close they are, and
+writing the actions down next to the sound. [NOTICE](NOTICE) has the full account.
+
 ## License
 
-MIT. The airway engine is CHIMERA's, by Jameson Hodge, also MIT: see [NOTICE](NOTICE).
+Bayin's own code is MIT ([LICENSE](LICENSE)). CHIMERA is MIT, © Jameson Hodge
+([LICENSES/CHIMERA-MIT.txt](LICENSES/CHIMERA-MIT.txt)).

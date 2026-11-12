@@ -125,3 +125,26 @@ fn another_body_is_another_voice() {
     assert!(man != child);
     assert!(rms(&child[14400..]) > 0.02, "the child's voice is silent");
 }
+
+#[test]
+fn the_dogs_bark_is_as_short_and_as_high_as_a_real_one() {
+    let dog = instrument("dog").unwrap();
+    let mut player = Player::new(dog, FS, &[]);
+    player.play(dog.phrase("bark").unwrap());
+    let mut x = vec![0f32; (0.6 * FS) as usize];
+    player.render(&mut x);
+    // measured barks last 0.16–0.32 s and stay between 340 and 680 Hz
+    let loud = x.iter().fold(0f32, |m, v| m.max(v.abs()));
+    let sounding = x.chunks(480).filter(|c| rms(c) > 0.05 * loud as f64).count() as f64 / 100.0;
+    assert!((0.12..0.35).contains(&sounding), "the bark lasts {sounding} s");
+    let f = pitch(&x[2400..6496], 200.0, 1200.0);
+    assert!((340.0..680.0).contains(&f), "the bark is at {f:.0} Hz");
+}
+
+#[test]
+fn chimeras_creatures_are_all_here() {
+    for id in ["songbird", "seal", "alligator", "elephant"] {
+        let spec = instrument(id).unwrap_or_else(|| panic!("no {id}"));
+        assert!(!spec.phrases.is_empty(), "{id} has no calls");
+    }
+}

@@ -169,6 +169,7 @@ pub fn spec() -> Spec {
         gate: (0.25, 0.35),
         gain: 2.8e-8,
         reference: None,
+        credit: "Assembled in Bayin from CHIMERA's tubes and whistle source.",
         build,
     }
 }

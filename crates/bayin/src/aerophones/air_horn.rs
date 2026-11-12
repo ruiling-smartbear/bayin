@@ -163,6 +163,7 @@ pub fn spec() -> Spec {
         gate: (0.03, 0.12),
         gain: 1.6e-9,
         reference: None,
+        credit: "Assembled in Bayin from CHIMERA's tubes and lip valve.",
         build,
     }
 }

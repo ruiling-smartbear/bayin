@@ -148,6 +148,7 @@ pub fn spec() -> Spec {
         gate: (NOW, NOW),
         gain: 1.0,
         reference: None,
+        credit: "CHIMERA's voice model, by Jameson Hodge, unchanged.",
         build,
     }
 }
