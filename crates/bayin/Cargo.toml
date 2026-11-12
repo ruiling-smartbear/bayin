@@ -1,0 +1,9 @@
+[package]
+name = "bayin"
+description = "Bayin (八音): physically modelled instruments that turn actions into sound"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+chimera.workspace = true

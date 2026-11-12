@@ -1,0 +1,13 @@
+[package]
+name = "bayin-cli"
+description = "bayin list | play | dataset"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "bayin"
+path = "src/main.rs"
+
+[dependencies]
+bayin = { path = "../bayin" }

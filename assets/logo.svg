@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Bayin">
+  <title>Bayin 八音</title>
+  <!-- 八: two brush strokes that flare like the bell of a horn, and the sound leaving it -->
+  <g fill="#C08A2E">
+    <path d="M51 29 C 49 57, 37 77, 10 89 A 6.5 6.5 0 0 0 19 100 C 45 86, 55.5 61, 56 29 A 2.5 2.5 0 0 0 51 29 Z"/>
+    <path d="M64 19 A 2.5 2.5 0 0 1 69 19 C 71 54, 83 77, 110 89 A 6.5 6.5 0 0 1 101 100 C 75 86, 64.5 58, 64 19 Z"/>
+  </g>
+  <g fill="none" stroke="#C08A2E" stroke-linecap="round" stroke-width="2.6">
+    <path d="M33 104 A 60 60 0 0 0 87 104" opacity="0.6"/>
+    <path d="M43 112 A 44 44 0 0 0 77 112" opacity="0.32"/>
+  </g>
+</svg>

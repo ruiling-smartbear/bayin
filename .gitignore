@@ -1,0 +1,6 @@
+target/
+references/*/
+*.f32
+/out/
+__pycache__/
+.DS_Store

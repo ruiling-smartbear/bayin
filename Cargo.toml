@@ -1,0 +1,20 @@
+[workspace]
+resolver = "3"
+members = ["crates/bayin", "crates/bayin-cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[workspace.dependencies]
+# The airway physics (tubes, valves, jets) is CHIMERA's, used as it is and pinned to one commit.
+chimera = { git = "https://github.com/jamesondh/chimera-vocal-synth", rev = "1d3ea496cad0fbe3e73361515aec187e868fbd47" }
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "fat"
+
+[profile.test]
+opt-level = 3
